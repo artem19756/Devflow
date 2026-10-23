@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#09090b">
+  <meta name="description" content="DEVFLOW — карманная мастерская разработчика.">
+  <title>DEVFLOW — Developer Workspace</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar glass" id="sidebar">
+      <a class="brand" href="#" data-page="dashboard" aria-label="DEVFLOW главная">
+        <span class="brand-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg></span>
+        <span><strong>DEVFLOW</strong><small>DEVELOPER WORKSPACE</small></span>
+      </a>
+      <div class="nav-label">РАБОЧЕЕ МЕСТО</div>
+      <nav class="nav-list" aria-label="Основная навигация">
+        <button class="nav-item active" data-page="dashboard"><span class="nav-icon">⌂</span>Главная</button>
+        <button class="nav-item" data-page="playground"><span class="nav-icon">⌘</span>Live Playground</button>
+        <button class="nav-item" data-page="projects"><span class="nav-icon">▣</span>Мои проекты <span class="nav-count" id="projectCount">0</span></button>
+      </nav>
+      <div class="nav-label">ИНСТРУМЕНТЫ</div>
+      <nav class="nav-list" aria-label="Инструменты">
+        <button class="nav-item" data-page="code-tools"><span class="nav-icon">⌁</span>Code Tools</button>
+        <button class="nav-item" data-page="visual-lab"><span class="nav-icon">◈</span>Visual Lab</button>
+        <button class="nav-item" data-page="export"><span class="nav-icon">⇩</span>Export Center</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="storage-card">
+          <div class="storage-top"><span class="status-dot"></span><span>Локальное хранилище</span></div>
+          <p>Данные хранятся в этом браузере.</p>
+          <button class="text-button" data-page="export">Резервная копия <span>↗</span></button>
+        </div>
+        <div class="sidebar-foot"><span class="online-dot"></span> DEVFLOW v1.0 <span class="foot-sep">·</span> OFFLINE-READY</div>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <button class="mobile-menu icon-button" id="menuToggle" aria-label="Открыть меню">☰</button>
+        <div class="breadcrumbs"><span>Workspace</span><span class="crumb-slash">/</span><strong id="pageCrumb">Главная</strong></div>
+        <div class="top-actions">
+          <label class="global-search"><span>⌕</span><input id="globalSearch" type="search" placeholder="Найти инструмент…" autocomplete="off"><kbd> / </kbd></label>
+          <button class="icon-button" id="themeToggle" title="Переключить контраст" aria-label="Переключить контраст">◐</button>
+          <button class="avatar" title="Локальный профиль">D</button>
+        </div>
+      </header>
+
+      <section class="page active" id="page-dashboard">
+        <div class="hero-panel glass">
+          <div class="hero-copy">
+            <div class="eyebrow"><span class="eyebrow-line"></span> ТВОЯ КАРМАННАЯ МАСТЕРСКАЯ</div>
+            <h1>Создавай. Проверяй.<br><span>Запускай.</span></h1>
+            <p>Инструменты разработчика — в одном пространстве.<br class="desktop-only"> Без лишних вкладок, аккаунтов и платных API.</p>
+            <div class="hero-buttons"><button class="btn btn-primary" data-page="playground">Открыть редактор <span>↗</span></button><button class="btn btn-secondary" data-page="code-tools">Все инструменты <span>→</span></button></div>
+          </div>
+          <div class="hero-art" aria-hidden="true">
+            <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+            <div class="core-glow"></div>
+            <div class="floating-code"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span><div class="fake-code"><i></i><i></i><i></i><i></i><i></i></div></div>
+            <div class="floating-chip chip-a">{"{}"} <small>JSON</small></div>
+            <div class="floating-chip chip-b">‹/› <small>HTML</small></div>
+            <div class="floating-chip chip-c">◈ <small>CSS</small></div>
+          </div>
+          <div class="hero-grid"></div>
+        </div>
+
+        <div class="section-heading"><div><div class="eyebrow muted">БЫСТРЫЙ ДОСТУП</div><h2>Инструменты на каждый день</h2></div><button class="inline-link" data-page="code-tools">Все инструменты <span>→</span></button></div>
+        <div class="tool-grid" id="dashboardTools"></div>
+
+        <div class="section-heading lower-heading"><div><div class="eyebrow muted">ТВОЙ ПРОГРЕСС</div><h2>Рабочее пространство</h2></div></div>
+        <div class="stats-grid">
+          <article class="stat-card glass"><span class="stat-icon">▣</span><div><span class="stat-label">Проекты</span><strong id="statProjects">0</strong><small>Сохранено в браузере</small></div></article>
+          <article class="stat-card glass"><span class="stat-icon">⌁</span><div><span class="stat-label">Инструменты</span><strong>12</strong><small>Готовы к работе</small></div></article>
+          <article class="stat-card glass"><span class="stat-icon">◷</span><div><span class="stat-label">Последнее действие</span><strong id="statLast">—</strong><small>Локальная активность</small></div></article>
+        </div>
+        <div class="notice"><span class="notice-icon">i</span><p><strong>Твои данные остаются у тебя.</strong> Проекты сохраняются в браузере на этом устройстве. Для переноса используй Export Center и сохрани резервную копию.</p><button class="notice-close" id="noticeClose" aria-label="Закрыть">×</button></div>
+      </section>
+
+      <section class="page" id="page-playground">
+        <div class="page-intro"><div><div class="eyebrow muted">LIVE PLAYGROUND</div><h1>Редактор кода</h1><p>Пиши HTML, CSS и JavaScript и смотри результат сразу.</p></div><div class="intro-actions"><button class="btn btn-secondary" id="resetEditor">Сбросить</button><button class="btn btn-primary" id="savePlayground">Сохранить проект <span>↓</span></button></div></div>
+        <div class="editor-workspace glass">
+          <div class="editor-toolbar"><div class="window-dots"><i></i><i></i><i></i></div><div class="editor-file-label"><span class="file-icon">⌘</span><span id="currentFileName">index.html</span><span class="unsaved-dot" id="unsavedDot" hidden></span></div><div class="editor-toolbar-actions"><button class="small-button" id="runCode">▶ Запустить</button><button class="small-button" id="copyCurrent">Копировать</button></div></div>
+          <div class="editor-tabs" role="tablist" aria-label="Файлы редактора"><button class="editor-tab active" data-file="html">index.html</button><button class="editor-tab" data-file="css">style.css</button><button class="editor-tab" data-file="js">script.js</button></div>
+          <div class="editor-body"><div class="line-numbers" id="lineNumbers">1</div><textarea id="codeEditor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Редактор кода"></textarea></div>
+          <div class="editor-status"><span><i class="status-dot"></i> Готов к работе</span><span id="editorLanguage">HTML</span><span id="lineCount">1 строка</span><span>UTF-8</span></div>
+        </div>
+        <div class="preview-heading"><div><h2>Предпросмотр</h2><span class="preview-subtitle">Изолированный iframe · обновляется по запуску</span></div><button class="inline-link" id="refreshPreview">Обновить ↻</button></div>
+        <div class="preview-frame-wrap glass"><div class="preview-browserbar"><span class="browser-dot"></span><span class="browser-url">devflow.local / preview</span><span class="preview-state" id="previewState">Ожидает запуска</span></div><iframe id="previewFrame" title="Предпросмотр проекта" sandbox="allow-scripts"></iframe></div>
+      </section>
+
+      <section class="page" id="page-projects">
+        <div class="page-intro"><div><div class="eyebrow muted">PROJECT VAULT</div><h1>Мои проекты</h1><p>Твои работы, сохранённые локально в браузере.</p></div><button class="btn btn-primary" id="newProject">＋ Новый проект</button></div>
+        <div class="project-toolbar"><label class="search-field"><span>⌕</span><input id="projectSearch" type="search" placeholder="Поиск проектов…"></label><select id="projectSort" aria-label="Сортировка проектов"><option value="updated">Последние изменённые</option><option value="name">По названию</option><option value="created">Сначала старые</option></select></div>
+        <div class="project-grid" id="projectGrid"></div>
+        <div class="empty-state glass" id="projectsEmpty"><div class="empty-icon">▣</div><h3>Здесь пока пусто</h3><p>Создай проект или сохрани код из редактора — он появится здесь.</p><button class="btn btn-primary" id="emptyNewProject">Создать первый проект</button></div>
+      </section>
+
+      <section class="page" id="page-code-tools">
+        <div class="page-intro"><div><div class="eyebrow muted">CODE TOOLS</div><h1>Инструменты кода</h1><p>Форматируй, проверяй и сравнивай код без отправки данных на сервер.</p></div></div>
+        <div class="tool-filter-row"><label class="search-field"><span>⌕</span><input id="toolSearch" type="search" placeholder="Найти инструмент…"></label><div class="filter-pills"><button class="filter-pill active" data-filter="all">Все</button><button class="filter-pill" data-filter="code">Код</button><button class="filter-pill" data-filter="text">Текст</button></div></div>
+        <div class="tool-grid tool-grid-large" id="allTools"></div>
+        <div class="utility-panel glass" id="utilityPanel">
+          <div class="utility-head"><div><div class="eyebrow muted">WORKBENCH</div><h2 id="utilityTitle">JSON Formatter</h2><p id="utilityDescription">Форматирование и проверка JSON.</p></div><button class="icon-button" id="clearUtility" title="Очистить">×</button></div>
+          <div class="utility-controls"><select id="utilityMode" aria-label="Режим инструмента"><option value="format-json">Форматировать JSON</option><option value="minify-json">Минифицировать JSON</option><option value="format-html">Форматировать HTML (базово)</option><option value="minify-text">Удалить лишние пробелы</option><option value="base64-encode">Текст → Base64</option><option value="base64-decode">Base64 → текст</option><option value="url-encode">URL Encode</option><option value="url-decode">URL Decode</option><option value="count-text">Статистика текста</option><option value="diff-text">Сравнение текста</option></select><button class="btn btn-primary" id="processUtility">Выполнить <span>→</span></button></div>
+          <div class="utility-editors"><label><span>ВХОДНЫЕ ДАННЫЕ</span><textarea id="utilityInput" spellcheck="false" placeholder='Вставь сюда код или текст…'></textarea></label><label><span>РЕЗУЛЬТАТ</span><textarea id="utilityOutput" spellcheck="false" readonly placeholder="Результат появится здесь…"></textarea></label></div>
+          <div class="utility-footer"><span id="utilityStatus">Обработка выполняется локально</span><button class="inline-link" id="copyUtilityOutput">Копировать результат ↗</button></div>
+        </div>
+      </section>
+
+      <section class="page" id="page-visual-lab">
+        <div class="page-intro"><div><div class="eyebrow muted">VISUAL LAB</div><h1>Визуальная лаборатория</h1><p>Создавай цвета, градиенты, тени и QR-коды для своих проектов.</p></div></div>
+        <div class="visual-grid">
+          <article class="visual-card glass"><div class="visual-card-head"><div><span class="card-kicker">01 / COLOR</span><h2>Палитра цвета</h2><p>Подбери цвет и скопируй HEX-код.</p></div><span class="card-symbol">◈</span></div><div class="color-stage" id="colorStage"></div><div class="color-controls"><label>Цвет<input id="colorPicker" type="color" value="#8b8bff"></label><label>HEX-код<input id="colorHex" value="#8b8bff" maxlength="7"></label></div><div class="color-values"><button data-color-value="hex"><span>HEX</span><strong id="hexValue">#8B8BFF</strong><span>↗</span></button><button data-color-value="rgb"><span>RGB</span><strong id="rgbValue">139, 139, 255</strong><span>↗</span></button><button data-color-value="hsl"><span>HSL</span><strong id="hslValue">240, 100%, 77%</strong><span>↗</span></button></div></article>
+          <article class="visual-card glass"><div class="visual-card-head"><div><span class="card-kicker">02 / GRADIENT</span><h2>CSS Gradient</h2><p>Настрой градиент и забери готовый CSS.</p></div><span class="card-symbol">◒</span></div><div class="gradient-preview" id="gradientPreview"></div><div class="gradient-controls"><label>Цвет A<input type="color" id="gradientA" value="#17171f"></label><label>Цвет B<input type="color" id="gradientB" value="#8b8bff"></label><label>Угол <strong id="angleValue">135°</strong><input type="range" min="0" max="360" value="135" id="gradientAngle"></label></div><div class="css-output"><code id="gradientCode">background: linear-gradient(135deg, #17171f, #8b8bff);</code><button class="small-button" id="copyGradient">Копировать</button></div></article>
+          <article class="visual-card glass"><div class="visual-card-head"><div><span class="card-kicker">03 / SHADOW</span><h2>Генератор теней</h2><p>Собери box-shadow под свой интерфейс.</p></div><span class="card-symbol">▱</span></div><div class="shadow-stage"><div class="shadow-object" id="shadowObject"></div></div><div class="range-controls"><label>Смещение X <strong id="shadowXValue">0px</strong><input id="shadowX" type="range" min="-30" max="30" value="0"></label><label>Смещение Y <strong id="shadowYValue">16px</strong><input id="shadowY" type="range" min="-30" max="40" value="16"></label><label>Размытие <strong id="shadowBlurValue">40px</strong><input id="shadowBlur" type="range" min="0" max="80" value="40"></label><label>Прозрачность <strong id="shadowOpacityValue">25%</strong><input id="shadowOpacity" type="range" min="0" max="100" value="25"></label></div><div class="css-output"><code id="shadowCode">box-shadow: 0px 16px 40px rgba(0,0,0,.25);</code><button class="small-button" id="copyShadow">Копировать</button></div></article>
+          <article class="visual-card glass"><div class="visual-card-head"><div><span class="card-kicker">04 / QR</span><h2>QR-конструктор</h2><p>Создай QR-код для ссылки или текста.</p></div><span class="card-symbol">▦</span></div><label class="qr-input-label">Ссылка или текст<input id="qrText" value="https://example.com" placeholder="https://…"></label><div class="qr-output" id="qrOutput"><div class="qr-placeholder">QR-код появится после создания</div></div><div class="qr-actions"><button class="btn btn-primary" id="makeQr">Создать QR-код</button><button class="btn btn-secondary" id="downloadQr" disabled>Скачать PNG</button></div><p class="tiny-note">Генерация QR выполняется локально. QR-код содержит только введённый текст.</p></article>
+        </div>
+      </section>
+
+      <section class="page" id="page-export">
+        <div class="page-intro"><div><div class="eyebrow muted">EXPORT CENTER</div><h1>Экспорт и резервные копии</h1><p>Сохраняй проекты и переноси их между устройствами.</p></div></div>
+        <div class="export-grid">
+          <article class="export-card glass"><div class="export-icon">⇩</div><h2>Экспорт проекта</h2><p>Собери выбранный проект в ZIP-архив с HTML, CSS и JavaScript файлами.</p><label class="field-label">Выбери проект<select id="exportProjectSelect"><option value="">Нет сохранённых проектов</option></select></label><button class="btn btn-primary full-btn" id="downloadProjectZip">Скачать ZIP <span>↓</span></button><small>Архив готов для загрузки на GitHub или статический хостинг.</small></article>
+          <article class="export-card glass"><div class="export-icon">◫</div><h2>Резервная копия</h2><p>Сохрани проекты и настройки DEVFLOW в JSON-файл, чтобы восстановить их позже.</p><div class="backup-summary"><span>Проектов в копии</span><strong id="backupProjectCount">0</strong></div><button class="btn btn-primary full-btn" id="downloadBackup">Создать резервную копию <span>↓</span></button><label class="btn btn-secondary full-btn import-label">Восстановить из копии <span>↑</span><input type="file" id="restoreBackup" accept=".json,application/json" hidden></label><small>При восстановлении существующие данные будут объединены по ID, а не удалены.</small></article>
+          <article class="export-card glass"><div class="export-icon">＋</div><h2>Импорт файлов</h2><p>Открой HTML, CSS, JS, JSON, TXT или ZIP-проект. ZIP можно распаковать вручную и загрузить файлы по отдельности.</p><label class="btn btn-secondary full-btn import-label">Выбрать файлы <span>↑</span><input type="file" id="importFiles" multiple accept=".html,.htm,.css,.js,.mjs,.json,.txt,.md,.svg,.xml" hidden></label><div class="import-status" id="importStatus">Поддерживаются текстовые файлы.</div></article>
+          <article class="export-card glass"><div class="export-icon">⌘</div><h2>Проверка хранилища</h2><p>Посмотри состояние локальных данных и скачай копию перед очисткой браузера.</p><div class="storage-details"><div><span>Сохранённые проекты</span><strong id="storageProjectNum">0</strong></div><div><span>Размер данных</span><strong id="storageSize">—</strong></div><div><span>Последнее сохранение</span><strong id="storageLastSave">—</strong></div></div><button class="btn btn-danger full-btn" id="clearAllData">Очистить все локальные данные</button><small>Это действие необратимо. Сначала скачай резервную копию.</small></article>
+        </div>
+        <div class="notice"><span class="notice-icon">!</span><p><strong>Важно:</strong> браузерное хранилище может быть удалено настройками браузера. Регулярно сохраняй резервную копию на устройство.</p></div>
+      </section>
+
+      <footer class="app-footer"><span>DEVFLOW <span class="foot-sep">/</span> BUILT FOR BUILDERS</span><span>Локально. Просто. Под твоим контролем.</span></footer>
+    </main>
+  </div>
+  <div class="toast-region" id="toastRegion" aria-live="polite"></div>
+  <dialog id="projectDialog" class="modal glass"><form method="dialog" id="projectForm"><div class="modal-top"><div><div class="eyebrow muted">PROJECT VAULT</div><h2 id="projectDialogTitle">Новый проект</h2></div><button class="icon-button" value="cancel" aria-label="Закрыть">×</button></div><label class="field-label">Название проекта<input id="projectName" required maxlength="80" placeholder="Например, мой сайт"></label><label class="field-label">Описание<textarea id="projectDescription" rows="3" maxlength="300" placeholder="Что ты создаёшь?"></textarea></label><label class="field-label">HTML<textarea id="projectHtml" rows="5" spellcheck="false"></textarea></label><label class="field-label">CSS<textarea id="projectCss" rows="4" spellcheck="false"></textarea></label><label class="field-label">JavaScript<textarea id="projectJs" rows="4" spellcheck="false"></textarea></label><div class="modal-actions"><button class="btn btn-secondary" value="cancel">Отмена</button><button class="btn btn-primary" id="saveProjectDialog" value="save">Сохранить проект</button></div></form></dialog>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
